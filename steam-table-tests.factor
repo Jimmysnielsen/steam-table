@@ -15,6 +15,9 @@ IN: steam-table.tests
 { t } [ \ R constant? ] unit-test
 { t } [ R 0.461526 = ] unit-test
 
+{ t } [ 0.165291643e2 B23-temperature 0.623150000e3 1e-6 fp-= ] unit-test
+
+{ t } [ 0.623150000e3 B23-pressure 0.165291643e2 1e-7 fp-= ] unit-test
 
 
 
