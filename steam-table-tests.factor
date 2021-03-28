@@ -1,8 +1,9 @@
 ! Copyright (C) 2021 Your name.
 ! See http://factorcode.org/license.txt for BSD license.
-USING: kernel tools.test words.constant steam-table ;
+USING: accessors kernel tools.test words.constant steam-table ;
 IN: steam-table.tests
 
+! CONSTANTS
 { t } [ \ T-CRIT constant? ] unit-test
 { t } [ T-CRIT 647.096 = ] unit-test
 
@@ -19,5 +20,10 @@ IN: steam-table.tests
 
 { t } [ 0.623150000e3 B23-pressure 0.165291643e2 1e-7 fp-= ] unit-test
 
+! TUPLES
+{ t } [ pT new pT? ] unit-test
+{ t } [ P-CRIT T-CRIT <pT> pT? ] unit-test
+{ t } [ P-CRIT T-CRIT <pT> p>> P-CRIT = ] unit-test
+{ t } [ P-CRIT T-CRIT <pT> T>> T-CRIT = ] unit-test
 
 

@@ -1,6 +1,6 @@
 ! Copyright (C) 2021 Your name.
 ! See http://factorcode.org/license.txt for BSD license.
-USING: locals math math.functions math.parser ;
+USING: kernel locals math math.functions math.parser ;
 IN: steam-table
 
 ! CONSTANTS
@@ -8,6 +8,10 @@ CONSTANT: T-CRIT 647.096 ! [K]
 CONSTANT: P-CRIT 22.064  ! [MPa]
 CONSTANT: RHO-CRIT 322.  ! [kg/m3]
 CONSTANT: R 0.461526     ! [kJ/kg/K]
+
+! TUPLES
+TUPLE: pT p T ;
+: <pT> ( p T -- pT ) pT boa ;
 
 ! auxiliary
 ! compare two floats to = within eps
