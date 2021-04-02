@@ -31,3 +31,8 @@ IN: steam-table.tests
 { t } [ 500 p-sat 0.263889776e1  1.e-8  fp-= ] unit-test
 { t } [ 600 p-sat 0.123443146e2  1.e-7  fp-= ] unit-test
 
+
+! SATURATION TEMPERATURE
+{ t } [ 0.1 T-sat 0.372755919e3 1.e-6 fp-= ] unit-test
+{ t } [ 1.0 T-sat 0.453035632e3 1.e-6 fp-= ] unit-test
+{ t } [ 10. T-sat 0.584149488e3 1.e-6 fp-= ] unit-test
