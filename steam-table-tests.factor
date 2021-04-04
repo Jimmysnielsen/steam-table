@@ -1,6 +1,6 @@
 ! Copyright (C) 2021 Your name.
 ! See http://factorcode.org/license.txt for BSD license.
-USING: accessors kernel tools.test words.constant steam-table ;
+USING: accessors kernel math tools.test words.constant steam-table ;
 IN: steam-table.tests
 
 ! CONSTANTS
@@ -23,6 +23,10 @@ IN: steam-table.tests
 ! TUPLES
 { t } [ pT new pT? ] unit-test
 { t } [ P-CRIT T-CRIT <pT> pT? ] unit-test
+! issue #3:
+{ t } [ pT new p>> float? ] unit-test
+{ t } [ pT new T>> float? ] unit-test
+! issue #3:end
 { t } [ P-CRIT T-CRIT <pT> p>> P-CRIT = ] unit-test
 { t } [ P-CRIT T-CRIT <pT> T>> T-CRIT = ] unit-test
 

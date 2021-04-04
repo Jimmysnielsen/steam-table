@@ -10,7 +10,7 @@ CONSTANT: RHO-CRIT 322.  ! [kg/m3]
 CONSTANT: R 0.461526     ! [kJ/kg/K]
 
 ! TUPLES
-TUPLE: pT p T ;
+TUPLE: pT { p float initial: 0.0 } { T float initial: 0.0 } ;
 : <pT> ( p T -- pT ) pT boa ;
 
 ! auxiliary
