@@ -1,6 +1,6 @@
 ! Copyright (C) 2021 Your name.
 ! See http://factorcode.org/license.txt for BSD license.
-USING: kernel locals math math.functions math.parser ;
+USING: accessors combinators kernel locals math math.functions math.parser ;
 IN: steam-table
 
 ! REFERENCE DOCUMENT 1: IAPWS R7-97(2012)
@@ -82,6 +82,24 @@ TUPLE: pT { p float initial: 0.0 } { T float initial: 0.0 } ;
         n10 D + 
             n10 D + sq n9 n10 D * + 4 * - 0.5 ^ - 
             2 / ; ! T-sat (eq. 31)
+
+!   testing for region 1 (section 5)
+!   valid range: 273.15 K <= T <= 623.15 K and ps(T) <= p <= 1000 MPa
+! :: region1? ( pT -- ? ) pT >boolean ; ! stub
+:: region1? ( pT -- ? )
+    pT p>> pT T>> :> ( p T )
+    {   { [ T 273.15 < ] [ f ] } 
+        { [ T 623.15 > ] [ f ] }
+        { [ p T p-sat < ] [ f ] }
+        { [ p 100. > ] [ f ] } 
+        [ t ] } cond ;
+
+
+
+
+
+
+
 
 
 

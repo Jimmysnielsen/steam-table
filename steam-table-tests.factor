@@ -40,3 +40,13 @@ IN: steam-table.tests
 { t } [ 0.1 T-sat 0.372755919e3 1.e-6 fp-= ] unit-test
 { t } [ 1.0 T-sat 0.453035632e3 1.e-6 fp-= ] unit-test
 { t } [ 10. T-sat 0.584149488e3 1.e-6 fp-= ] unit-test
+
+! region1?
+{ t } [ 273.15 p-sat 273.15 <pT> region1? ] unit-test
+{ t } [ 100. 273.15 <pT> region1? ] unit-test
+{ t } [ 100. 623.15 <pT> region1? ] unit-test
+{ t } [  623.15 p-sat 623.15 <pT> region1? ] unit-test
+{ f } [ 50. 273.00 <pT> region1? ] unit-test
+{ f } [ 400. 101. <pT> region1? ] unit-test
+{ f } [ 50. 624. <pT> region1? ] unit-test
+{ f } [ 623.15 p-sat 1 - 623.15 <pT> region1? ] unit-test
