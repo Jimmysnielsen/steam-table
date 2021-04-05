@@ -16,10 +16,29 @@ CONSTANT: R 0.461526     ! [kJ/kg/K]
 TUPLE: pT { p float initial: 0.0 } { T float initial: 0.0 } ;
 : <pT> ( p T -- pT ) pT boa ;
 
-! auxiliary
+! AUXILIARY FUNCTIONS
 ! compare two floats to = within eps
 :: fp-= ( a b eps -- ? )
         a b - abs eps < ;
+
+! between-ranges?
+:: [in-range?] ( x x-min x-max -- ? ) 
+    x-min x <= 
+    x x-max <= and ;
+
+:: (in-range?] ( x x-min x-max -- ? ) 
+    x-min x < 
+    x x-max <= and ; 
+
+:: [in-range?) ( x x-min x-max -- ? ) 
+    x-min x <= 
+    x x-max < and ;
+
+:: (in-range?) ( x x-min x-max -- ? ) 
+    x-min x < 
+    x x-max < and ;
+
+
 
 ! boundary between region 2 and 3 [ref. section 4]
 

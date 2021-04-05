@@ -30,6 +30,16 @@ IN: steam-table.tests
 { t } [ P-CRIT T-CRIT <pT> p>> P-CRIT = ] unit-test
 { t } [ P-CRIT T-CRIT <pT> T>> T-CRIT = ] unit-test
 
+! AUXILIARY FUNCTIONS
+{ t } [ 1. 1. 2. [in-range?] ] unit-test
+{ t } [ 2. 1. 2. [in-range?] ] unit-test
+{ f } [ 1. 1. 2. (in-range?] ] unit-test
+{ t } [ 2. 1. 2. (in-range?] ] unit-test
+{ t } [ 1. 1. 2. [in-range?) ] unit-test
+{ f } [ 2. 1. 2. [in-range?) ] unit-test
+{ f } [ 1. 1. 2. (in-range?) ] unit-test
+{ f } [ 2. 1. 2. (in-range?) ] unit-test
+
 ! SATURATION PRESSURE CURVE 
 { t } [ 300 p-sat 0.353658941e-2 1.e-11 fp-= ] unit-test
 { t } [ 500 p-sat 0.263889776e1  1.e-8  fp-= ] unit-test
