@@ -111,7 +111,13 @@ IN: steam-table.tests
 { f } [ 50.1 2273.15 <pT> region5? ] unit-test
 
 
+! verification region 1
 
+! verification region 2
+
+! verification region 3
+
+! verification region 5
 
 
 
