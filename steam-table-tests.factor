@@ -115,7 +115,25 @@ IN: steam-table.tests
 { f } [ 50.1 2273.15 <pT> region5? ] unit-test
 
 
-! verification region 1
+! verification region 1 [ref.1 table 5]
+{ t } [ 0.100215168e-2  3. 300. <pT> speed-of-sound  1e-11 fp-= ] unit-test
+{ t } [ 0.971180894e-3 80. 300. <pT> speed-of-sound  1e-12 fp-= ] unit-test
+{ t } [ 0.120241800e-2  3. 500. <pT> speed-of-sound  1e-11 fp-= ] unit-test
+{ t } [ 0.115331273e3   3. 300. <pT> enthalpy        1e-6  fp-= ] unit-test
+{ t } [ 0.184142828e3  80. 300. <pT> enthalpy        1e-6  fp-= ] unit-test
+{ t } [ 0.975542239e3   3. 500. <pT> enthalpy        1e-6  fp-= ] unit-test
+{ t } [ 0.112324818e3   3. 300. <pT> internal-energy 1e-6  fp-= ] unit-test
+{ t } [ 0.106448356e3  80. 300. <pT> internal-energy 1e-6  fp-= ] unit-test
+{ t } [ 0.971934985e3   3. 500. <pT> internal-energy 1e-6  fp-= ] unit-test
+{ t } [ 0.392294792     3. 300. <pT> entropy         1e-9  fp-= ] unit-test
+{ t } [ 0.368563852    80. 300. <pT> entropy         1e-9  fp-= ] unit-test
+{ t } [ 0.258041912e1   3. 500. <pT> entropy         1e-8  fp-= ] unit-test
+{ t } [ 0.417301218e1   3. 300. <pT> Cp              1e-8  fp-= ] unit-test
+{ t } [ 0.401008987e1  80. 300. <pT> Cp              1e-8  fp-= ] unit-test
+{ t } [ 0.465580682e1   3. 500. <pT> Cp              1e-8  fp-= ] unit-test
+{ t } [ 0.150773921e4   3. 300. <pT> speed-of-sound  1e-5  fp-= ] unit-test
+{ t } [ 0.163469054e4  80. 300. <pT> speed-of-sound  1e-5  fp-= ] unit-test
+{ t } [ 0.124071337e4   3. 500. <pT> speed-of-sound  1e-5  fp-= ] unit-test
 
 ! verification region 2
 

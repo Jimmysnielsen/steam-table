@@ -234,19 +234,19 @@ TUPLE: pT { p float initial: 0.0 } { T float initial: 0.0 } ;
 
 
 
-! Region 1
+! Region 1 basic equation
 
 
 
-! Region 2
+! Region 2 basic equation
 
 
 
-! Region 3
+! Region 3 basic equation
 
 
 
-! Region 5
+! Region 5 basic equation
 
 
 
