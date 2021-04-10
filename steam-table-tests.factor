@@ -21,6 +21,10 @@ IN: steam-table.tests
 
 { t } [ 0.623150000e3 B23-pressure 0.165291643e2 1e-7 fp-= ] unit-test
 
+! TABLES
+{ t } [ Table2 symbol? ] unit-test
+{ t } [ Table2 get length 34 = ] unit-test
+
 ! TUPLES
 { t } [ pT new pT? ] unit-test
 { t } [ P-CRIT T-CRIT <pT> pT? ] unit-test

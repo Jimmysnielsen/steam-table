@@ -213,6 +213,43 @@ TUPLE: pT { p float initial: 0.0 } { T float initial: 0.0 } ;
     p 0 50 (in-range?] and ;
     
 
+! !!! todo 
+:: Cp ( pT -- n ) pT >boolean ; ! stub
+
+:: Cv ( pT -- n ) pT >boolean ; ! stub 
+
+:: Helmholz ( pT -- n ) pT >boolean ; ! stub
+
+:: Gibbs ( pT -- n ) pT >boolean ; ! stub
+
+:: enthalpy ( pT -- n ) pT >boolean ; ! stub
+
+:: volume ( pT -- n ) pT >boolean ; ! stub
+
+:: internal-energy ( pT -- n ) pT >boolean ; ! stub
+
+:: entropy ( pT -- n ) pT >boolean ; ! stub
+
+:: speed-of-sound ( pT -- n ) pT >boolean ; ! stub
+
+
+
+! Region 1
+
+
+
+! Region 2
+
+
+
+! Region 3
+
+
+
+! Region 5
+
+
+
 
 
 
