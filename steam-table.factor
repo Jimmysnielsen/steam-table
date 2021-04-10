@@ -214,23 +214,23 @@ TUPLE: pT { p float initial: 0.0 } { T float initial: 0.0 } ;
     
 
 ! !!! todo 
-:: Cp ( pT -- n ) pT >boolean ; ! stub
+:: Cp ( pT -- n ) pT p>> pT T>> * ; ! stub
 
-:: Cv ( pT -- n ) pT >boolean ; ! stub 
+:: Cv ( pT -- n ) pT p>> pT T>> * ; ! stub 
 
-:: Helmholz ( pT -- n ) pT >boolean ; ! stub
+:: Helmholz ( pT -- n ) pT p>> pT T>> * ; ! stub
 
-:: Gibbs ( pT -- n ) pT >boolean ; ! stub
+:: Gibbs ( pT -- n ) pT p>> pT T>> * ; ! stub
 
-:: enthalpy ( pT -- n ) pT >boolean ; ! stub
+:: enthalpy ( pT -- n ) pT p>> pT T>> * ; ! stub
 
 :: volume ( pT -- n ) pT >boolean ; ! stub
 
-:: internal-energy ( pT -- n ) pT >boolean ; ! stub
+:: internal-energy ( pT -- n ) pT p>> pT T>> * ; ! stub
 
-:: entropy ( pT -- n ) pT >boolean ; ! stub
+:: entropy ( pT -- n ) pT p>> pT T>> * ; ! stub
 
-:: speed-of-sound ( pT -- n ) pT >boolean ; ! stub
+:: speed-of-sound ( pT -- n ) pT p>> pT T>> * ; ! stub
 
 
 
