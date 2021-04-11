@@ -135,6 +135,13 @@ IN: steam-table.tests
 { t } [ 0.163469054e4  80. 300. <pT> speed-of-sound  1e-5  fp-= ] unit-test
 { t } [ 0.124071337e4   3. 500. <pT> speed-of-sound  1e-5  fp-= ] unit-test
 
+
+! verification T(p,h) for region 1 [ref.1 table 7]
+{ t } [ 0.391798509e3  3.  500. T(p,h) 1e-6 fp-= ] unit-test
+{ t } [ 0.378108626e3 80.  500. T(p,h) 1e-6 fp-= ] unit-test
+{ t } [ 0.611041229e3 80. 1500  T(p,h) 1e-6 fp-= ] unit-test
+
+
 ! verification region 2
 
 ! verification region 3
