@@ -1,6 +1,6 @@
 ! Copyright (C) 2021 Your name.
 ! See http://factorcode.org/license.txt for BSD license.
-USING: accessors combinators kernel locals math math.functions math.parser namespaces ;
+USING: accessors combinators kernel locals math math.functions math.parser namespaces sequences ;
 
 
 IN: steam-table
@@ -14,8 +14,9 @@ CONSTANT: P-CRIT 22.064  ! [MPa]
 CONSTANT: RHO-CRIT 322.  ! [kg/m3]
 CONSTANT: R 0.461526     ! [kJ/kg/K]
 
-! TABLES fo data
-SYMBOL: Table2 ! [ref. 1]
+! TABLES for data
+SYMBOL: Table2 ! [ref. 1, calculation of Gibbs free energy for region 1] 
+!      i  Ii  Ji  ni
 {   {  1  0  -2   0.14632971213167     }
     {  2  0  -1  -0.84548187169114     }
     {  3  0   0  -0.37563603672040e1   }
@@ -74,6 +75,28 @@ SYMBOL: Table6 ! [ref. 1, backwards equation T(p,h) for region 1]
     { 19 5 32  0.58265442020601e-14 } 
     { 20 6 32 -0.15020185953503e-16 } } Table6 set
 
+SYMBOL: Table8 ! [ ref.1, backwards equation T(p,s) for region 1]
+!   i Ii Ji ni
+{   {  1 0  0  0.17478268058307e3 } 
+    {  2 0  1  0.34806930892873e2 } 
+    {  3 0  2  0.65292584978455e1 } 
+    {  4 0  3  0.33039981775489 } 
+    {  5 0 11 -0.19281382923196e-6 } 
+    {  6 0 31 -0.24909197244573e-22 } 
+    {  7 1  0 -0.26107636489332 } 
+    {  8 1  1  0.22592965981586 } 
+    {  9 1  2 -0.64256463395226e-1 } 
+    { 10 1  3  0.78876289270526e-2 } 
+    { 11 1 12  0.35672110607366e-9 } 
+    { 12 1 31  0.17332496994895e-23 } 
+    { 13 2  0  0.56608900654837e-3 } 
+    { 14 2  1 -0.32635483139717e-3 } 
+    { 15 2  2  0.44778286690632e-4 } 
+    { 16 2  9 -0.51322156908507e-9 } 
+    { 17 2 31 -0.42522657042207e-25 } 
+    { 18 3 10  0.26400441360689e-12 } 
+    { 19 3 32  0.78124600459723e-28 } 
+    { 20 4 32 -0.30732199903668e-30 } } Table8 set
 
 
 
@@ -235,6 +258,59 @@ TUPLE: pT { p float initial: 0.0 } { T float initial: 0.0 } ;
     p 0 50 (in-range?] and ;
     
 
+
+
+
+! Region 1 basic equation
+
+! :: (gibbs1) ( seq p' T' -- n ) 1 ; ! stub 
+:: (gibbs1) ( seq p' T' -- n )  ! [ref.1 equation 7 right hand side]
+    seq first4 :> ( i Ii Ji ni )
+    ni 7.1 p' - Ii ^ * T' 1.222 - Ji ^ * ;
+
+:: gibbs1 ( pT -- n ) 
+    pT p>> 16.53 / :> p' 
+    1386. pT T>> / :> T'
+    Table2 get [ p' T' (gibbs1) ] [ + ] map-reduce R * pT T>> * ; ! [ref.1 equation 7]
+
+! Region 1 backward equation T(p,h) [ref.1 equation 11]
+:: (T(p,h)) ( seq p' h' -- T )
+    seq first4 :> ( i Ii Ji ni )
+    ni p' Ii ^ *  h' 1 + Ji ^ * ;
+
+:: T(p,h) ( p h -- n )
+    p 1. / :> p'
+    h 2500. / :> h'
+    Table6 get [ p' h' (T(p,h)) ] [ + ] map-reduce ;
+
+! Region 1 backward equation T(p,s) [ref.1 eqaution 13]
+
+:: (T(p,s)) ( seq p' s' -- n )
+    seq first4 :> ( i Ii Ji ni )
+    ni p' Ii ^ * s' 2 + Ji ^ * ; 
+
+:: T(p,s) ( p s -- T ) 
+    p 1. / :> p'
+    s 1. / :> s'
+    Table8 get [ p' s' (T(p,s)) ] [ + ] map-reduce ;
+
+
+
+
+! Region 2 basic equation
+
+
+
+! Region 3 basic equation
+
+
+
+! Region 5 basic equation
+
+
+
+
+
 ! !!! todo 
 :: Cp ( pT -- n ) pT p>> pT T>> * ; ! stub
 
@@ -253,25 +329,6 @@ TUPLE: pT { p float initial: 0.0 } { T float initial: 0.0 } ;
 :: entropy ( pT -- n ) pT p>> pT T>> * ; ! stub
 
 :: speed-of-sound ( pT -- n ) pT p>> pT T>> * ; ! stub
-
-
-
-! Region 1 basic equation
-
-
-
-! Region 2 basic equation
-
-
-
-! Region 3 basic equation
-
-
-
-! Region 5 basic equation
-
-
-
 
 
 

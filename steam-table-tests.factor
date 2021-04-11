@@ -141,6 +141,11 @@ IN: steam-table.tests
 { t } [ 0.378108626e3 80.  500. T(p,h) 1e-6 fp-= ] unit-test
 { t } [ 0.611041229e3 80. 1500  T(p,h) 1e-6 fp-= ] unit-test
 
+! verification T(p,s) for region 1 [ref.1 table 9]
+{ t } [ 0.307842258e3  3. 0.5 T(p,s) 1e-6 fp-= ] unit-test
+{ t } [ 0.309979785e3 80. 0.5 T(p,s) 1e-6 fp-= ] unit-test
+{ t } [ 0.565899909e3 80. 3.0 T(p,s) 1e-6 fp-= ] unit-test
+
 
 ! verification region 2
 
