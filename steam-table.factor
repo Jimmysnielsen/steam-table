@@ -98,6 +98,65 @@ SYMBOL: Table8 ! [ ref.1, backwards equation T(p,s) for region 1]
     { 19 3 32  0.78124600459723e-28 } 
     { 20 4 32 -0.30732199903668e-30 } } Table8 set
 
+SYMBOL: Table10 ! [ref.1, coeffs for gamma_ideal region2]
+! i Ji ni
+{   { 1  0 -0.96927686500217e1 }
+    { 2  1  0.10086655968018e2 }
+    { 3 -5 -0.56087911283020e-2 }
+    { 4 -4  0.71452738081455e-1 }
+    { 5 -3 -0.40710498223928 }
+    { 6 -2  0.14240819171444e1 }
+    { 7 -1 -0.43839511319450e1 }
+    { 8  2 -0.28408632460772 }
+    { 9  3  0.21268463753307e-1 } } Table10 set 
+
+SYMBOL: Table11 ! [ref.1 coeffs for gamma_residual region2]
+!   i Ii Ji ni
+{  {  1  1  0 -0.17731742473213e-2 } 
+   {  2  1  1 -0.17834862292358e-1 } 
+   {  3  1  2 -0.45996013696365e-1 } 
+   {  4  1  3 -0.57581259083432e-1 } 
+   {  5  1  6 -0.50325278727930e-1 } 
+   {  6  2  1 -0.33032641670203e-4 } 
+   {  7  2  2 -0.18948987516315e-3 } 
+   {  8  2  4 -0.39392777243355e-2 } 
+   {  9  2  7 -0.43797295650573e-1 } 
+   { 10  2 36 -0.26674547914087e-4 } 
+   { 11  3  0  0.20481737692309e-7 } 
+   { 12  3  1  0.43870667284435e-6 } 
+   { 13  3  3 -0.32277677238570e-4 } 
+   { 14  3  6 -0.15033924542148e-2 } 
+   { 15  3 35 -0.40668253562649e-1 } 
+   { 16  4  1 -0.78847309559367e-9 } 
+   { 17  4  2  0.12790717852285e-7 } 
+   { 18  4  3  0.48225372718507e-6 } 
+   { 19  5  7  0.22922076337661e-5 } 
+   { 20  6  3 -0.16714766451061e-10 } 
+   { 21  6 16 -0.21171472321355e-2 } 
+   { 22  6 35 -0.23895741934104e2 }  ! !!! should this be e-2 ??
+   { 23  7  0 -0.59059564324270e-17 } 
+   { 24  7 11 -0.12621808899101e-5 } 
+   { 25  7 25 -0.38946842435739e-1 } 
+   { 26  8  8  0.11256211360459e-10 } 
+   { 27  8 36 -0.82311340897998e1 } ! !!! should this be e-1 ?? 
+   { 28  9 13  0.19809712802088e-7 } 
+   { 29 10  4  0.10406965210174e-18 } 
+   { 30 10 10 -0.10234747095929e-12 } 
+   { 31 10 14 -0.10018179379511e-8 } 
+   { 32 16 29 -0.80882908646985e-10 } 
+   { 33 16 50  0.10693031879409 } 
+   { 34 18 57 -0.33662250574171 } 
+   { 35 20 20  0.89185845355421e-24 } 
+   { 36 20 35  0.30629316876232e-12 } 
+   { 37 20 48 -0.42002467698208e-5 } 
+   { 38 21 21 -0.59056029685639e-25 } 
+   { 39 22 53  0.37826947613457e-5 } 
+   { 40 23 39 -0.12768608934681e-14 } 
+   { 41 24 26  0.73087610595061e-28 } 
+   { 42 24 40  0.55414715350778e-16 } 
+   { 43 24 58 -0.94369707241210e-6 } } Table11 set
+
+
 
 
 ! TUPLES
@@ -324,8 +383,8 @@ TUPLE: pT { p float initial: 0.0 } { T float initial: 0.0 } ;
 ! calculate properties for region1
 ! !!! volume
 ! :: volume-region1 ( <pT> -- n )
-    pT p>> 16.53 / :> p'
-    1386. pT T>> / :> T'
+  !  pT p>> 16.53 / :> p'
+  !  1386. pT T>> / :> T'
 
 
 ! !!! enthalpy
@@ -367,6 +426,25 @@ TUPLE: pT { p float initial: 0.0 } { T float initial: 0.0 } ;
 
 ! Region 2 basic equation
 
+:: (gamma2_ideal) ( seq p' T' -- n ) ! [ref.1 eq.16]
+    seq first3 :> ( i Ji ni )
+    ni T' Ji ^ * ;
+! :: gamma2_ideal ( p' T' -- n ) p' T' * ; ! stub !!! [ref.1 eq.16]
+:: gamma2_ideal ( p' T' -- n ) 
+    Table2 get [ p' T' (gamma2_ideal) ] [ + ] map-reduce 
+    p' log + ;
+
+:: (gamma2_residual)  ( seq p' T' -- n )
+    seq first4 :> ( i Ii Ji ni )
+    ni p' Ii ^ * T' 0.5 - Ji ^ * ; ! [reef.1 eq.17]
+
+! :: gamma2_residual ( p' T' -- n ) p' T' * ; ! stub !!! [ref.1 eq.17]
+:: gamma2_residual ( p' T' -- n )
+    Table11 get [ p' T' (gamma2_residual) ] [ + ] map-reduce ;
+
+:: gamma2 ( p' T' -- n ) [ gamma2_ideal ] [ gamma2_residual ] bi + ; ! stub [ref.1 eq.15]
+
+! :: gibbs2 ( -- ) ; !!! [ref.1 eq.15]
 
 
 ! Region 3 basic equation
@@ -379,51 +457,85 @@ TUPLE: pT { p float initial: 0.0 } { T float initial: 0.0 } ;
 
 
 
+
+
 ! !!! todo 
+:: Cp-region1 ( pT -- n ) <pT> p>> ; ! stub !!!
+:: Cp-region2 ( pT -- n ) <pT> p>> ; ! stub !!!
+:: Cp-region3 ( pT -- n ) <pT> p>> ; ! stub !!!
+:: Cp-region5 ( pT -- n ) <pT> p>> ; ! stub !!!
 ! :: Cp ( pT -- n ) pT p>> pT T>> * ; ! stub
 :: Cp ( pT -- n )
     {   { [ pT region1? ] [ pT Cp-region1 ] } 
         { [ pT region2? ] [ pT Cp-region2 ] }
         { [ pT region3? ] [ pT Cp-region3 ] }
-        { [ pT region5? ] [ pT Cp-region5 ] } } cond
+        { [ pT region5? ] [ pT Cp-region5 ] } } cond ;
 
-:: Cv ( pT -- n ) pT p>> pT T>> * ; ! stub 
-
+:: Cv-region1 ( pT -- n ) <pT> p>> ; ! stub !!!
+:: Cv-region2 ( pT -- n ) <pT> p>> ; ! stub !!!
+:: Cv-region3 ( pT -- n ) <pT> p>> ; ! stub !!!
+:: Cv-region5 ( pT -- n ) <pT> p>> ; ! stub !!!
+! :: Cv ( pT -- n ) pT p>> pT T>> * ; ! stub 
+:: Cv ( pT -- n ) 
     {   { [ pT region1? ] [ pT Cv-region1 ] } 
         { [ pT region2? ] [ pT Cv-region2 ] }
         { [ pT region3? ] [ pT Cv-region3 ] }
-        { [ pT region5? ] [ pT Cv-region5 ] } } cond
+        { [ pT region5? ] [ pT Cv-region5 ] } } cond ;
 
-:: enthalpy ( pT -- n ) pT p>> pT T>> * ; ! stub
-
+:: enthalpy-region1 ( pT -- n ) <pT> p>> ; ! stub !!!
+:: enthalpy-region2 ( pT -- n ) <pT> p>> ; ! stub !!!
+:: enthalpy-region3 ( pT -- n ) <pT> p>> ; ! stub !!!
+:: enthalpy-region5 ( pT -- n ) <pT> p>> ; ! stub !!!
+! :: enthalpy ( pT -- n ) pT p>> pT T>> * ; ! stub
+:: enthalpy ( pT -- n )
     {   { [ pT region1? ] [ pT enthalpy-region1 ] } 
         { [ pT region2? ] [ pT enthalpy-region2 ] }
         { [ pT region3? ] [ pT enthalpy-region3 ] }
-        { [ pT region5? ] [ pT enthalpy-region5 ] } } cond
+        { [ pT region5? ] [ pT enthalpy-region5 ] } } cond ;
 
-:: volume ( pT -- n ) pT >boolean ; ! stub
-    {   { [ pT region1? ] [ pT Cp-region1 ] } 
-        { [ pT region2? ] [ pT Cp-region2 ] }
-        { [ pT region3? ] [ pT Cp-region3 ] }
-        { [ pT region5? ] [ pT Cp-region5 ] } } cond
+:: volume-region1 ( pT -- n ) <pT> p>> ; ! stub !!!
+:: volume-region2 ( pT -- n ) <pT> p>> ; ! stub !!!
+:: volume-region3 ( pT -- n ) <pT> p>> ; ! stub !!!
+:: volume-region5 ( pT -- n ) <pT> p>> ; ! stub !!!
+! :: volume ( pT -- n ) pT >boolean ; ! stub
+:: volume ( pT -- n )
+    {   { [ pT region1? ] [ pT volume-region1 ] } 
+        { [ pT region2? ] [ pT volume-region2 ] }
+        { [ pT region3? ] [ pT volume-region3 ] }
+        { [ pT region5? ] [ pT volume-region5 ] } } cond ;
 
-:: internal-energy ( pT -- n ) pT p>> pT T>> * ; ! stub
+:: internal-energy-region1 ( pT -- n ) <pT> p>> ; ! stub !!!
+:: internal-energy-region2 ( pT -- n ) <pT> p>> ; ! stub !!!
+:: internal-energy-region3 ( pT -- n ) <pT> p>> ; ! stub !!!
+:: internal-energy-region5 ( pT -- n ) <pT> p>> ; ! stub !!!
+! :: internal-energy ( pT -- n ) pT p>> pT T>> * ; ! stub
+:: internal-energy ( pT -- n )
     {   { [ pT region1? ] [ pT internal-energy-region1 ] } 
         { [ pT region2? ] [ pT internal-energy-region2 ] }
         { [ pT region3? ] [ pT internal-energy-region3 ] }
-        { [ pT region5? ] [ pT internal-energy-region5 ] } } cond
+        { [ pT region5? ] [ pT internal-energy-region5 ] } } cond ;
 
-:: entropy ( pT -- n ) pT p>> pT T>> * ; ! stub
-    {   { [ pT region1? ] [ pT Cp-region1 ] } 
-        { [ pT region2? ] [ pT Cp-region2 ] }
-        { [ pT region3? ] [ pT Cp-region3 ] }
-        { [ pT region5? ] [ pT Cp-region5 ] } } cond
+:: entropy-region1 ( pT -- n ) <pT> p>> ; ! stub !!!
+:: entropy-region2 ( pT -- n ) <pT> p>> ; ! stub !!!
+:: entropy-region3 ( pT -- n ) <pT> p>> ; ! stub !!!
+:: entropy-region5 ( pT -- n ) <pT> p>> ; ! stub !!!
+! :: entropy ( pT -- n ) pT p>> pT T>> * ; ! stub
+:: entropy ( pT -- n )
+    {   { [ pT region1? ] [ pT entropy-region1 ] } 
+        { [ pT region2? ] [ pT entropy-region2 ] }
+        { [ pT region3? ] [ pT entropy-region3 ] }
+        { [ pT region5? ] [ pT entropy-region5 ] } } cond ;
 
-:: speed-of-sound ( pT -- n ) pT p>> pT T>> * ; ! stub
-    {   { [ pT region1? ] [ pT Cp-region1 ] } 
-        { [ pT region2? ] [ pT Cp-region2 ] }
-        { [ pT region3? ] [ pT Cp-region3 ] }
-        { [ pT region5? ] [ pT Cp-region5 ] } } cond
+:: speed-of-sound-region1 ( pT -- n ) <pT> p>> ; ! stub !!!
+:: speed-of-sound-region2 ( pT -- n ) <pT> p>> ; ! stub !!!
+:: speed-of-sound-region3 ( pT -- n ) <pT> p>> ; ! stub !!!
+:: speed-of-sound-region5 ( pT -- n ) <pT> p>> ; ! stub !!!
+! :: speed-of-sound ( pT -- n ) pT p>> pT T>> * ; ! stub
+:: speed-of-sound ( pT -- n )
+    {   { [ pT region1? ] [ pT speed-of-sound-region1 ] } 
+        { [ pT region2? ] [ pT speed-of-sound-region2 ] }
+        { [ pT region3? ] [ pT speed-of-sound-region3 ] }
+        { [ pT region5? ] [ pT speed-of-sound-region5 ] } } cond ;
 
 
 
