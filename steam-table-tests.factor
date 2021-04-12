@@ -114,6 +114,33 @@ IN: steam-table.tests
 { t } [ 50. 2273.15 <pT> region5? ] unit-test
 { f } [ 50.1 2273.15 <pT> region5? ] unit-test
 
+! verification of equations for region 1, table 4
+{ t } [ 0 { 1 0 0 0 } 1 2 (gamma) = ] unit-test
+{ t } [ 2 { 1 0 0 2 } 1 2 (gamma) = ] unit-test
+{ t } [ 6.1 0.778 *  { 1 1 1 1 } 1 2 (gamma) = ] unit-test 
+
+! { t } [ 0  { 1 0 0 0 } 1 2 (gamma_pi) = ] unit-test
+! { t } [ -2 { 1 1 0 2 } 1 2 (gamma_pi) = ] unit-test
+! { t } [ -2 0.778 *  { 1 1 1 2 } 1 2 (gamma_pi) = ] unit-test
+! { t } [ 6.1 0.778 *  { 1 1 1 1 } 1 2 (gamma_pi) = ] unit-test 
+
+! { t } [ 0 { 1 0 0 0 } 1 2 (gamma_pi_pi) = ] unit-test
+! { t } [ -2 { 1 1 0 2 } 1 2 (gamma_pi_pi) = ] unit-test
+
+! { t } [ 6.1 0.778 *  { 1 1 1 1 } 1 2 (gamma_pi_pi) = ] unit-test 
+
+!  { t } [ 0 { 1 0 0 0 } 1 2 (gamma_tau) = ] unit-test
+! { t } [ 2 { 1 0 0 2 } 1 2 (gamma_tau) = ] unit-test
+! { t } [ 6.1 0.778 *  { 1 1 1 1 } 1 2 (gamma_tau) = ] unit-test 
+
+! { t } [ 0 { 1 0 0 0 } 1 2 (gamma_tau_tau) = ] unit-test
+! { t } [ 2 { 1 0 0 2 } 1 2 (gamma_tau_tau) = ] unit-test
+! { t } [ 6.1 0.778 *  { 1 1 1 1 } 1 2 (gamma_tau_tau) = ] unit-test 
+
+! { t } [ 0 { 1 0 0 0 } 1 2 (gamma_pi_tau) = ] unit-test
+! { t } [ 2 { 1 0 0 2 } 1 2 (gamma_pi_tau) = ] unit-test
+! { t } [ 6.1 0.778 *  { 1 1 1 1 } 1 2 (gamma_pi_tau) = ] unit-test 
+
 
 ! verification region 1 [ref.1 table 5]
 { t } [ 0.100215168e-2  3. 300. <pT> speed-of-sound  1e-11 fp-= ] unit-test

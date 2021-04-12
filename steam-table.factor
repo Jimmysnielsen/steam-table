@@ -268,10 +268,78 @@ TUPLE: pT { p float initial: 0.0 } { T float initial: 0.0 } ;
     seq first4 :> ( i Ii Ji ni )
     ni 7.1 p' - Ii ^ * T' 1.222 - Ji ^ * ;
 
-:: gibbs1 ( pT -- n ) 
+:: gibbs1 ( pT -- n ) ! [ref.1 equation 7 and table 4]
     pT p>> 16.53 / :> p' 
     1386. pT T>> / :> T'
     Table2 get [ p' T' (gibbs1) ] [ + ] map-reduce R * pT T>> * ; ! [ref.1 equation 7]
+
+! table 4, gamma
+:: (gamma) ( seq p' T' -- n )
+    seq first4 :> ( n Ii Ji ni )
+    ni 7.1 p' - Ii ^ * T' 1.222 - Ji ^ * ;
+
+:: gamma ( p' T' -- n )
+    Table2 get [ p' T' (gamma) ] [ + ] map-reduce ;
+
+! table 4, gamma_pi
+:: (gamma_pi) ( seq p' T' -- n )
+    seq first4 :> ( n Ii Ji ni )
+    ni neg Ii * 7.1 p' - Ii 1 - ^ * T' 1.222 - Ji ^ * ; 
+
+:: gamma_pi ( p' T' -- n )
+    Table2 get [ p' T' (gamma_pi) ] [ + ] map-reduce ;
+
+! table 4, gamma_pi_pi
+:: (gamma_pi_pi) ( seq p' T' -- n )
+    seq first4 :> ( n Ii Ji ni )
+    ni Ii * Ii 1 - * 7.1 p' - Ii 2 - ^ * T' 1.222 - Ji ^ * ;
+
+:: gamma_pi_pi ( p' T' -- n )
+    Table2 get [ p' T' (gamma_pi_pi) ] [ + ] map-reduce ;
+
+! table 4, gamma_tau
+:: (gamma_tau) ( seq p' T' -- n )
+    seq first4 :> ( n Ii Ji ni )
+    ni 7.1 p' - Ii ^ * Ji * T' 1.222 - Ji 1 - ^ * ;
+
+:: gamma_tau ( p' T' -- n )
+    Table2 get [ p' T' (gamma_tau) ] [ + ] map-reduce ;
+
+! table 4, gamma_tau_tau
+:: (gamma_tau_tau) ( seq p' T' -- n )
+    seq first4 :> ( n Ii Ji ni )
+    ni 7.1 p' - Ii ^ * Ji * Ji 1 - * T' 1.222 - Ji 2 - ^ * ;
+
+:: gamma_tau_tau ( p' T' -- n )
+    Table2 get [ p' T' (gamma_tau_tau) ] [ + ] map-reduce ;
+
+! table 4, gamma_pi_tau
+:: (gamma_pi_tau) ( seq p' T' -- n )
+    seq first4 :> ( n Ii Ji ni )
+    ni neg Ii * 7.1 p' - Ii 1 - ^ * Ji * T' 1.222 - Ji 1 - ^ * ;
+
+:: gamma_pi_tau ( p' T' -- n )
+    Table2 get [ p' T' (gamma_pi_tau) ] [ + ] map-reduce ;
+
+! calculate properties for region1
+! !!! volume
+! :: volume-region1 ( <pT> -- n )
+    pT p>> 16.53 / :> p'
+    1386. pT T>> / :> T'
+
+
+! !!! enthalpy
+
+! !!! internal energy
+
+! !!! entropy
+
+! !!! Cp
+
+! !!! Cv
+
+! speed of sound
+
 
 ! Region 1 backward equation T(p,h) [ref.1 equation 11]
 :: (T(p,h)) ( seq p' h' -- T )
@@ -279,7 +347,7 @@ TUPLE: pT { p float initial: 0.0 } { T float initial: 0.0 } ;
     ni p' Ii ^ *  h' 1 + Ji ^ * ;
 
 :: T(p,h) ( p h -- n )
-    p 1. / :> p'
+    p 1. / :> p' 
     h 2500. / :> h'
     Table6 get [ p' h' (T(p,h)) ] [ + ] map-reduce ;
 
@@ -312,24 +380,50 @@ TUPLE: pT { p float initial: 0.0 } { T float initial: 0.0 } ;
 
 
 ! !!! todo 
-:: Cp ( pT -- n ) pT p>> pT T>> * ; ! stub
+! :: Cp ( pT -- n ) pT p>> pT T>> * ; ! stub
+:: Cp ( pT -- n )
+    {   { [ pT region1? ] [ pT Cp-region1 ] } 
+        { [ pT region2? ] [ pT Cp-region2 ] }
+        { [ pT region3? ] [ pT Cp-region3 ] }
+        { [ pT region5? ] [ pT Cp-region5 ] } } cond
 
 :: Cv ( pT -- n ) pT p>> pT T>> * ; ! stub 
 
-:: Helmholz ( pT -- n ) pT p>> pT T>> * ; ! stub
-
-:: Gibbs ( pT -- n ) pT p>> pT T>> * ; ! stub
+    {   { [ pT region1? ] [ pT Cv-region1 ] } 
+        { [ pT region2? ] [ pT Cv-region2 ] }
+        { [ pT region3? ] [ pT Cv-region3 ] }
+        { [ pT region5? ] [ pT Cv-region5 ] } } cond
 
 :: enthalpy ( pT -- n ) pT p>> pT T>> * ; ! stub
 
+    {   { [ pT region1? ] [ pT enthalpy-region1 ] } 
+        { [ pT region2? ] [ pT enthalpy-region2 ] }
+        { [ pT region3? ] [ pT enthalpy-region3 ] }
+        { [ pT region5? ] [ pT enthalpy-region5 ] } } cond
+
 :: volume ( pT -- n ) pT >boolean ; ! stub
+    {   { [ pT region1? ] [ pT Cp-region1 ] } 
+        { [ pT region2? ] [ pT Cp-region2 ] }
+        { [ pT region3? ] [ pT Cp-region3 ] }
+        { [ pT region5? ] [ pT Cp-region5 ] } } cond
 
 :: internal-energy ( pT -- n ) pT p>> pT T>> * ; ! stub
+    {   { [ pT region1? ] [ pT internal-energy-region1 ] } 
+        { [ pT region2? ] [ pT internal-energy-region2 ] }
+        { [ pT region3? ] [ pT internal-energy-region3 ] }
+        { [ pT region5? ] [ pT internal-energy-region5 ] } } cond
 
 :: entropy ( pT -- n ) pT p>> pT T>> * ; ! stub
+    {   { [ pT region1? ] [ pT Cp-region1 ] } 
+        { [ pT region2? ] [ pT Cp-region2 ] }
+        { [ pT region3? ] [ pT Cp-region3 ] }
+        { [ pT region5? ] [ pT Cp-region5 ] } } cond
 
 :: speed-of-sound ( pT -- n ) pT p>> pT T>> * ; ! stub
-
+    {   { [ pT region1? ] [ pT Cp-region1 ] } 
+        { [ pT region2? ] [ pT Cp-region2 ] }
+        { [ pT region3? ] [ pT Cp-region3 ] }
+        { [ pT region5? ] [ pT Cp-region5 ] } } cond
 
 
 
