@@ -174,7 +174,46 @@ IN: steam-table.tests
 { t } [ 0.565899909e3 80. 3.0 T(p,s) 1e-6 fp-= ] unit-test
 
 
-! verification region 2
+! verification region 2 [ref.1 table 15]
+{ t } [ 0.394913866e2   0.0035 300. <pT> speed-of-sound  1e-7  fp-= ] unit-test
+{ t } [ 0.923015898e2   0.0035 700. <pT> speed-of-sound  1e-7  fp-= ] unit-test
+{ t } [ 0.542946619e-2 30.     700. <pT> speed-of-sound  1e-11 fp-= ] unit-test
+{ t } [ 0.254991145e4   0.0035 300. <pT> enthalpy        1e-5  fp-= ] unit-test
+{ t } [ 0.333568375e4   0.0035 700. <pT> enthalpy        1e-5  fp-= ] unit-test
+{ t } [ 0.263149474e4  30.     700. <pT> enthalpy        1e-5  fp-= ] unit-test
+{ t } [ 0.241169160e4   0.0035 300. <pT> internal-energy 1e-5  fp-= ] unit-test
+{ t } [ 0.301262819e4   0.0035 700. <pT> internal-energy 1e-5  fp-= ] unit-test
+{ t } [ 0.246861076e4  30.     700. <pT> internal-energy 1e-5  fp-= ] unit-test
+{ t } [ 0.852238967e1   0.0035 300. <pT> entropy         1e-8  fp-= ] unit-test
+{ t } [ 0.101749996e2   0.0035 700. <pT> entropy         1e-7  fp-= ] unit-test
+{ t } [ 0.517540298e1  30.     700. <pT> entropy         1e-8  fp-= ] unit-test
+{ t } [ 0.191300162e1   0.0035 300. <pT> Cp              1e-8  fp-= ] unit-test
+{ t } [ 0.208141274e1   0.0035 700. <pT> Cp              1e-8  fp-= ] unit-test
+{ t } [ 0.103505092e2  30.     700. <pT> Cp              1e-7  fp-= ] unit-test
+{ t } [ 0.427920172e3   0.0035 300. <pT> speed-of-sound  1e-6  fp-= ] unit-test
+{ t } [ 0.644289068e3   0.0035 700. <pT> speed-of-sound  1e-6  fp-= ] unit-test
+{ t } [ 0.480386523e3  30.     700. <pT> speed-of-sound  1e-6  fp-= ] unit-test
+
+! verification region 2 [ref.1 table 18]
+! !!!
+{ t } [ 0.192516540e0   1.  450. <pT> speed-of-sound  1e-9  fp-= ] unit-test
+{ t } [ 0.186212297e0   1.  440. <pT> speed-of-sound  1e-9  fp-= ] unit-test
+{ t } [ 0.121685206e0   1.5 450. <pT> speed-of-sound  1e-9  fp-= ] unit-test
+{ t } [ 0.276881115e4   1.  450. <pT> enthalpy        1e-5  fp-= ] unit-test
+{ t } [ 0.274015123e4   1.  440. <pT> enthalpy        1e-5  fp-= ] unit-test
+{ t } [ 0.   1.5 450. <pT> enthalpy        1e-5  fp-= ] unit-test
+{ t } [ 0.   1.  450. <pT> internal-energy 1e-5  fp-= ] unit-test
+{ t } [ 0.   1.  440. <pT> internal-energy 1e-5  fp-= ] unit-test
+{ t } [ 0.   1.5 450. <pT> internal-energy 1e-5  fp-= ] unit-test
+{ t } [ 0.   1.  450. <pT> entropy         1e-8  fp-= ] unit-test
+{ t } [ 0.   1.  440. <pT> entropy         1e-7  fp-= ] unit-test
+{ t } [ 0.   1.5 450. <pT> entropy         1e-8  fp-= ] unit-test
+{ t } [ 0.   1.  450. <pT> Cp              1e-8  fp-= ] unit-test
+{ t } [ 0.   1.  440. <pT> Cp              1e-8  fp-= ] unit-test
+{ t } [ 0.   1.5 450. <pT> Cp              1e-7  fp-= ] unit-test
+{ t } [ 0.   1.  450. <pT> speed-of-sound  1e-6  fp-= ] unit-test
+{ t } [ 0.   1.  440. <pT> speed-of-sound  1e-6  fp-= ] unit-test
+{ t } [ 0.   1.5 450. <pT> speed-of-sound  1e-6  fp-= ] unit-test
 
 ! verification region 3
 
