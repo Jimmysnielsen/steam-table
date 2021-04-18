@@ -201,19 +201,23 @@ IN: steam-table.tests
 { t } [ 0.121685206e0   1.5 450. <pT> speed-of-sound  1e-9  fp-= ] unit-test
 { t } [ 0.276881115e4   1.  450. <pT> enthalpy        1e-5  fp-= ] unit-test
 { t } [ 0.274015123e4   1.  440. <pT> enthalpy        1e-5  fp-= ] unit-test
-{ t } [ 0.   1.5 450. <pT> enthalpy        1e-5  fp-= ] unit-test
-{ t } [ 0.   1.  450. <pT> internal-energy 1e-5  fp-= ] unit-test
-{ t } [ 0.   1.  440. <pT> internal-energy 1e-5  fp-= ] unit-test
-{ t } [ 0.   1.5 450. <pT> internal-energy 1e-5  fp-= ] unit-test
-{ t } [ 0.   1.  450. <pT> entropy         1e-8  fp-= ] unit-test
-{ t } [ 0.   1.  440. <pT> entropy         1e-7  fp-= ] unit-test
-{ t } [ 0.   1.5 450. <pT> entropy         1e-8  fp-= ] unit-test
-{ t } [ 0.   1.  450. <pT> Cp              1e-8  fp-= ] unit-test
-{ t } [ 0.   1.  440. <pT> Cp              1e-8  fp-= ] unit-test
-{ t } [ 0.   1.5 450. <pT> Cp              1e-7  fp-= ] unit-test
-{ t } [ 0.   1.  450. <pT> speed-of-sound  1e-6  fp-= ] unit-test
-{ t } [ 0.   1.  440. <pT> speed-of-sound  1e-6  fp-= ] unit-test
-{ t } [ 0.   1.5 450. <pT> speed-of-sound  1e-6  fp-= ] unit-test
+{ t } [ 0.272134539e4   1.5 450. <pT> enthalpy        1e-5  fp-= ] unit-test
+{ t } [ 0.257629461e4   1.  450. <pT> internal-energy 1e-5  fp-= ] unit-test
+{ t } [ 0.255393894e4   1.  440. <pT> internal-energy 1e-5  fp-= ] unit-test
+{ t } [ 0.253881758e4   1.5 450. <pT> internal-energy 1e-5  fp-= ] unit-test
+{ t } [ 0.656660377e1   1.  450. <pT> entropy         1e-8  fp-= ] unit-test
+{ t } [ 0.650218759e1   1.  440. <pT> entropy         1e-8  fp-= ] unit-test
+{ t } [ 0.629170440e1   1.5 450. <pT> entropy         1e-8  fp-= ] unit-test
+{ t } [ 0.276349265e1   1.  450. <pT> Cp              1e-8  fp-= ] unit-test
+{ t } [ 0.298166443e1   1.  440. <pT> Cp              1e-8  fp-= ] unit-test
+{ t } [ 0.362795578e1   1.5 450. <pT> Cp              1e-7  fp-= ] unit-test
+{ t } [ 0.498408101e3   1.  450. <pT> speed-of-sound  1e-6  fp-= ] unit-test
+{ t } [ 0.489363295e3   1.  440. <pT> speed-of-sound  1e-6  fp-= ] unit-test
+{ t } [ 0.481941819e3   1.5 450. <pT> speed-of-sound  1e-6  fp-= ] unit-test
+
+! verification B2bc equation [ref.1 eq.20 and eq.21]
+{ t } [ 0.100000000e3  0.3516004323e4 B2bc-pressure 1e-6 fp-= ] unit-test
+{ t } [ 0.3516004323e4 0.100000000e3  B2bc-enthalpy 1e-6 fp-= ] unit-test
 
 ! verification region 3
 
