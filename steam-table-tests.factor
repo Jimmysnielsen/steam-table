@@ -219,6 +219,18 @@ IN: steam-table.tests
 { t } [ 0.100000000e3  0.3516004323e4 B2bc-pressure 1e-6 fp-= ] unit-test
 { t } [ 0.3516004323e4 0.100000000e3  B2bc-enthalpy 1e-6 fp-= ] unit-test
 
+! verification [eq. 22, 23 and 24]
+{ t } [ 0.534433241e3  0.001 3000. T2a(p,h) 1e-6 fp-= ] unit-test
+{ t } [ 0.575373370e3  3.    3000. T2a(p,h) 1e-6 fp-= ] unit-test
+{ t } [ 0.101077577e4  3.    4000. T2a(p,h) 1e-5 fp-= ] unit-test
+{ t } [ 0.801299102e3  5.    3500. T2b(p,h) 1e-6 fp-= ] unit-test
+{ t } [ 0.101531583e4  5.    4000. T2b(p,h) 1e-5 fp-= ] unit-test
+{ t } [ 0.875279054e3 25.    3500. T2b(p,h) 1e-6 fp-= ] unit-test
+{ t } [ 0.743056411e3 40.    2700. T2c(p,h) 1e-6 fp-= ] unit-test
+{ t } [ 0.791137067e3 60.    2700. T2c(p,h) 1e-6 fp-= ] unit-test
+{ t } [ 0.882756860e3 60.    3200. T2c(p,h) 1e-6 fp-= ] unit-test
+
+
 ! verification region 3
 
 ! verification region 5
