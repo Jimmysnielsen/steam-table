@@ -230,6 +230,17 @@ IN: steam-table.tests
 { t } [ 0.791137067e3 60.    2700. T2c(p,h) 1e-6 fp-= ] unit-test
 { t } [ 0.882756860e3 60.    3200. T2c(p,h) 1e-6 fp-= ] unit-test
 
+! verification [eq. 25,26 and 27]
+{ t } [ 0.399517097e3  0.1 7.5  T2a(p,s) 1e-6 fp-= ] unit-test
+{ t } [ 0.514127081e3  0.1 8.   T2a(p,s) 1e-6 fp-= ] unit-test
+{ t } [ 0.103984917e4  2.5 8.   T2a(p,s) 1e-5 fp-= ] unit-test
+{ t } [ 0.600484040e3  8.  6.   T2b(p,s) 1e-6 fp-= ] unit-test
+{ t } [ 0.106495556e4  8.  7.5  T2b(p,s) 1e-5 fp-= ] unit-test
+{ t } [ 0.103801126e4 90.  6.   T2b(p,s) 1e-5 fp-= ] unit-test
+{ t } [ 0.697992849e3 20.  5.75 T2c(p,s) 1e-6 fp-= ] unit-test
+{ t } [ 0.854011484e3 80.  5.25 T2c(p,s) 1e-6 fp-= ] unit-test
+{ t } [ 0.949017998e3 80.  5.75 T2c(p,s) 1e-6 fp-= ] unit-test
+
 
 ! verification region 3
 
